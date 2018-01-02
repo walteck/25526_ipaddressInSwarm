@@ -17,13 +17,13 @@ The following steps could probably be handled in the Vagrantfile - but as this w
 `docker node update --availability drain manager`  
 ## Running the "Test"
 From the client the following commands can be run and the response inspected:
-`curl 192.168.56.120:8080/testresponder`
-`curl 192.168.56.121:8080/testresponder`
-`curl 192.168.56.122:8080/testresponder`
+* `curl 192.168.56.120:8080/testresponder`
+* `curl 192.168.56.121:8080/testresponder`
+* `curl 192.168.56.122:8080/testresponder`
 The output will look something like:
-`Key: Host Value: 192.168.56.120:8080
-** Key: Sourceip Value: 10.255.0.2**
-Key: Connection Value: close
-Key: Accept Value: */*
-Key: User-Agent Value: curl/7.35.0`
+* `Key: Host Value: 192.168.56.120:8080`
+* **`Key: Sourceip Value: 10.255.0.2`**
+* `Key: Connection Value: close`
+* `Key: Accept Value: */*`
+* `Key: User-Agent Value: curl/7.35.0`
 Note that the sourceIP is **not** the client source IP.
