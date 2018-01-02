@@ -3,9 +3,8 @@ import tornado.web
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.write("Hello, world")
         for key, value in self.request.headers.get_all():
-            self.write("Key: {0} Value: {1}".format(key, value))
+            self.write("Key: {0} Value: {1}\n".format(key, value))
 
 def make_app():
     return tornado.web.Application([

@@ -34,10 +34,7 @@ Vagrant.configure("2") do |config|
 	manager.vm.provision "shell", inline: "chmod +x /usr/local/bin/docker-compose", privileged: true
 	
     manager.vm.network :private_network, ip: "192.168.56.120"
-	#manager.vm.provision "shell",
-	#  run: "always",
-	#  inline: "sudo route add default gw 192.168.56.1 enp0s8"
-    #manager.vm.network :public_network
+	
       if File.file?("./hosts") 
         manager.vm.provision "file", source: "hosts", destination: "/tmp/hosts"
         manager.vm.provision "shell", inline: "cat /tmp/hosts >> /etc/hosts", privileged: true
@@ -48,10 +45,6 @@ Vagrant.configure("2") do |config|
 	  
 	  #Build our containers
 	  manager.vm.provision "file", source: "containers", destination: "$HOME/containers"
-#	  manager.vm.provision "docker" do |docker|
-#	      docker.build_image "/home/vagrant/containers/nginx", args: "-t vagrantdocker/nginx"
-#	      docker.build_image "/home/vagrant/containers/testresponder", args: "-t vagrantdocker/testresponder"
-#	  end
 	  #Deploy our stack
 	  manager.vm.provision "shell", inline: "docker service create --name registry --publish published=5000,target=5000 registry:2"
 	  manager.vm.provision "shell", inline: "pushd /home/vagrant/containers && docker-compose up -d && popd "
@@ -81,10 +74,6 @@ Vagrant.configure("2") do |config|
 	node01.vm.provision :docker
 	
     node01.vm.network :private_network, ip: "192.168.56.121"
-	#node01.vm.provision "shell",
-	#  run: "always",
-	#  inline: "sudo route add default gw 192.168.56.1 enp0s8"
-    #node01.vm.network :public_network
       if File.file?("./hosts") 
         node01.vm.provision "file", source: "hosts", destination: "/tmp/hosts"
         node01.vm.provision "shell", inline: "cat /tmp/hosts >> /etc/hosts", privileged: true
@@ -114,10 +103,6 @@ Vagrant.configure("2") do |config|
 	node02.vm.provision :docker
 	
     node02.vm.network :private_network, ip: "192.168.56.122"
-	#node02.vm.provision "shell",
-	#  run: "always",
-	#  inline: "sudo route add default gw 192.168.56.1 enp0s8"
-    #node02.vm.network :public_network
       if File.file?("./hosts") 
         node02.vm.provision "file", source: "hosts", destination: "/tmp/hosts"
         node02.vm.provision "shell", inline: "cat /tmp/hosts >> /etc/hosts", privileged: true
