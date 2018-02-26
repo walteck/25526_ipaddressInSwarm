@@ -1,0 +1,35 @@
+version: "3.4"
+services:
+  nginx:
+    image: 127.0.0.1:5000/nginx
+    build: /home/vagrant/containers/nginx/.
+    ports: 
+      - target: 8080
+        published: 8081
+        protocol: tcp
+        mode: host
+    networks:
+      - ourOtherNetwork
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+  testresponder:
+    image: 127.0.0.1:5000/testresponder
+    build: /home/vagrant/containers/testresponder/.
+    networks:
+      - ourOtherNetwork
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+networks:
+  ourOtherNetwork:
+  

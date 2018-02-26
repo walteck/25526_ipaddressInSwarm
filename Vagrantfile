@@ -50,7 +50,8 @@ Vagrant.configure("2") do |config|
 	  manager.vm.provision "shell", inline: "pushd /home/vagrant/containers && docker-compose up -d && popd "
 	  manager.vm.provision "shell", inline: "pushd /home/vagrant/containers && docker-compose down && popd "
 	  manager.vm.provision "shell", inline: "pushd /home/vagrant/containers && docker-compose push && popd "
-	  manager.vm.provision "shell", inline: "docker stack deploy --compose-file /home/vagrant/containers/docker-compose.yml stackdemo"
+	  manager.vm.provision "shell", inline: "docker stack deploy --compose-file /home/vagrant/containers/docker-compose.yml plainswarm"
+	  manager.vm.provision "shell", inline: "docker stack deploy --compose-file /home/vagrant/containers/docker-compose2.yml portupdates"
   end
   config.vm.define "node01" do |node01|
     node01.vm.box = "ubuntu/trusty64"
